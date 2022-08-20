@@ -14,48 +14,47 @@
 		<div class="col-xs-12">
 	  		<div class="box">
 	    		<div class='box-header with-border'>
-	      			<h3 class='box-title'><i class="fa fa-briefcase"></i> Lista de Personas</h3> 
-	      			<a class="btn btn-sm btn-primary pull-right" href="?c=Persona&a=v_Registrar"> Nueva Persona</a>
+	      			<h3 class='box-title'><i class="fa fa-briefcase"></i> Lista de Universidades</h3> 
+	      			<a class="btn btn-sm btn-primary pull-right" href="?c=Universidad&a=v_Registrar"> Nueva Universidad</a>
 	    		</div>
 	    		<div class="box-body box-body_table">
-	    		 <?php  $personas = $this->Listar();  ?>
+	    		 <?php  $universidades = $this->Listar();  ?>
                   	<table id="TablaEntidad" class="table table-bordered table-hover dataTable no-footer" width="100%">
 	                    <thead>
 	                      	<tr>                      
 		                    	<th>ID</th>                    
 			                    <th style="vertical-align: middle;">Codigo</th>
-			                    <th style="vertical-align: middle;">Nombres y Apellidos</th>
-			                    <th style="vertical-align: middle;">Celular</th>
-			                    <th style="vertical-align: middle;">Correo Corporativo</th>
+			                    <th style="vertical-align: middle;">Nombre</th>
+			                    <th style="vertical-align: middle;">Dirección</th>
+			                    <th style="vertical-align: middle;">Licenciado</th>
 			                  
-			                    <th style="vertical-align: middle;">Tipo Horario</th>
+			                    <th style="vertical-align: middle;">Cantidad de carreras</th>
 			                    <th style="vertical-align: middle;">Estado</th>
 			                    <th style="vertical-align: middle;">Acciones</th>
 	                     	</tr>
 	                    </thead>
 	                    <tbody>
-	                    	<?php foreach ($personas as $persona): ?>
+	                    	<?php foreach ($universidades as $universidad): ?>
 	                    	<tr>
-	                    		<td><?php echo $persona['idPersona']; ?></td>
-	                    		<td><?php echo $persona['codigo']; ?></td>
-	                    		<td><?php echo ucwords(strtolower($persona['apellido_paterno'])).' '.$persona['apellido_materno'].' '.$persona['primer_nombre'].' '.$persona['segundo_nombre']; ?></td>
-	                    		<td><?php echo $persona['celular']; ?></td>
-	                    		<td><?php echo $persona['correo']; ?></td>
-	                    		
-	                    		<td><?php echo $persona['tipo_horario']; ?></td>
-	                    		<?php if ($persona['activo']==1): ?>
+	                    		<td><?php echo $universidad['idUniversidad']; ?></td>
+	                    		<td><?php echo $universidad['codigo']; ?></td>
+	                    		<td><?php echo $universidad['nombre']; ?></td>
+	                    		<td><?php echo $universidad['direccion']; ?></td>
+	                    		<td><?php echo $universidad['licenciado']; ?></td>
+	                    		<td><?php echo $universidad['cantidad_carreras']; ?></td>
+	                    		<?php if ($universidad['activo']==1): ?>
                                 <td class=""><span class="label label-success"><i class="fa fa-check-square-o" aria-hidden="true"></i> Activo</span></td>
                                 <?php else: ?>
                                 <td class=""><span class="label label-danger"><i class="fa fa-square-o" aria-hidden="true"></i> Inactivo</span></td>
                                 <?php endif ?>
                             	<td class="a_center">                            		
-                            		<a href="?c=Persona&a=v_Actualizar&idPersona=<?php echo $persona['idPersona']; ?>" 
+                            		<a href="?c=Universidad&a=v_Actualizar&idUniversidad=<?php echo $universidad['idUniversidad']; ?>" 
 									class="btn btn-primary btn-xs " data-toggle="tooltip" data-placement="top" title="Actualizar">
                                    		<i class="fa fa-pencil"></i>   
                                		</a>
-                               		<a class="btn btn-danger btn-xs EliminarPersona" 
-									data-id="<?php echo $persona['idPersona']; ?>" data-persona="
-									<?php echo $persona['apellido_paterno'].' '.$persona['apellido_materno'].' '.$persona['primer_nombre'].' '.$persona['segundo_nombre']; ?>" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                               		<a class="btn btn-danger btn-xs EliminarUniversidad" 
+									data-id="<?php echo $universidad['idUniversidad']; ?>" data-universidad="
+									<?php echo $universidad['nombre']; ?>" data-toggle="tooltip" data-placement="top" title="Eliminar">
                                    		<i class="fa fa-trash"></i>   
                                		</a>
 
@@ -63,14 +62,7 @@
 	                    	</tr>
 	                    	<?php endforeach; ?>
 
-	                    	<?php
-	                    	echo '<pre>' ;
-	                    	$personas = $this->Listar();
-	                    		print_r($personas);
-	                    		//print_r($personas[0]['primer_nombre']);
-	                    	echo '</pre>';
 
-	                    	?>
 	                    </tbody>
                 	</table>                    
                 </div>
@@ -84,18 +76,18 @@
 <script>
 	
 	$(document).ready(function() {
-		$(".EliminarPersona").click(function(event) {
-			idPersona=$(this).attr('data-id');
+		$(".EliminarUniversidad").click(function(event) {
+			idUniversidad=$(this).attr('data-id');
 			bootbox.dialog({
-            message: "¿Estas seguro de eliminar a <b>"+$(this).attr('data-persona')+"</b>?",
-            title: "Eliminar Persona",
+            message: "¿Estas seguro de eliminar a <b>"+$(this).attr('data-universidad')+"</b>?",
+            title: "Eliminar Universidad",
             buttons: {
                 main: {
                     label: "Eliminar",
                     className: "btn-primary",
                     callback: function() {
                         //console.log('Eliminado al usuario');
-                        window.location.href = "?c=Persona&a=Eliminar&idPersona="+idPersona;
+                        window.location.href = "?c=Universidad&a=Eliminar&idUniversidad="+idUniversidad;
                     }
                 },
                 danger: {
