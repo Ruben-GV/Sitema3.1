@@ -119,9 +119,13 @@
                       ?>
                       <img src="<?php echo $fotoPerfil; ?>"  class="img-circle" alt="User Image">
                     <p>
+                      <small><?php echo $info_Persona['perfil']; ?></small>
                       <?php echo $info_Persona['primer_nombre'].' '.$info_Persona['apellido_paterno']?>
-                      <small><?php echo $info_Persona['perfil']; ?></small>                     
-                      
+                      <form action="subir_foto.php?id=<?php echo $info_Persona['login'];?>" method=post enctype="multipart/form-data">
+                        <input name="usuario" value="<?php echo $info_Persona['login'];?>" style="display: none;"><br></form>
+                    <font color="black"><div align='center'><input type="file" name="imagen"><br>
+                    <input type="submit" value="Cambiar foto (.jpg)"></div><br></font>             
+                    </form>
                     </p>
                   </li>
                   <!-- Menu Body -->
